@@ -1,6 +1,10 @@
+'''
+--------mapping from wiki-----
+Rotor detail     :  1941,feb7
+Model and Number : "GERMAN RAILWAY(ROCKET)"
+'''
 
-
-ETW={
+ETW = {
     'A':'Q',
     'B':'W',
     'C':'E',
@@ -84,7 +88,7 @@ ATON={
     'Y':24,
     'Z':25
 }
-W1=[
+L1=[
     'J',
     'G',
     'D',
@@ -112,7 +116,7 @@ W1=[
     'Y',
     'H'
 ]
-W2=[
+L2=[
     'N',
     'T',
     'Z',
@@ -141,7 +145,7 @@ W2=[
     'Q'
 ]
 
-W3=[
+L3=[
     'J',
     'V',
     'I',
@@ -197,10 +201,23 @@ R={
     'Y':'B',
     'Z':'L'
 }
+c={
+    1:L1,
+    2:L2,
+    3:L3
+}
 def fn(w,v):
     for key,value in w.items():
         if v==value:
             return key
+print(" Order of Wheel:")
+c1=int(input())
+c2=int(input())
+c3=int(input())
+W1=c[c1]
+W2=c[c1]
+W3=c[c1]
+
 print("Enter Wheel 1 config :")
 w1n=int(input())
 for i in range(w1n):
@@ -218,15 +235,28 @@ for i in range(w1n):
     W3.append(tt)
 
 print("--Enter a Characters You want to Encrypt/Decrypt---")
-print("Enter number of characters you want to encode :")
 res=""
-c=int(input())
 x=str(input()).upper()
+p1,p2,p3=0,0,0
 for i in x:
+    if i==' ':
+        res+=' '
+        continue
+
+    if p1>=25:
+        p1=0
+        p2+=1
+        t=W2.pop(0)
+        W2.append(t)
+    if p2>=25 :
+        p2=0
+        p3+=1
+        t=W3.pop(0)
+        W3.append(t)
+
 
     temp=R[W3[ATON[W2[ATON[W1[ATON[ETW[i]]]]]]]]
     temp2=fn(ETW,NTOA[W1.index(NTOA[W2.index(NTOA[W3.index(temp)])])])
-
     res+=temp2
     t=W1.pop(0)
     W1.append(t)
