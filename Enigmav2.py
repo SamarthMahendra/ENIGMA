@@ -262,17 +262,20 @@ class enigma:
         W2=self.Rotors[c2-1]
         W3=self.Rotors[c3-1]
 
-        print("Enter Wheel 1 config :") ''' number between 1 and 25'''
+        print("Enter Wheel 1 config :")
+        ''' number between 1 and 25'''
         w1n=int(input())
         for i in range(w1n):
             tt=W1[0].pop(0)
             W1[0].append(tt)
-        print("Enter Wheel 2 config :")''' number between 1 and 25'''
+        print("Enter Wheel 2 config :")
+        ''' number between 1 and 25'''
         w2n=int(input())
         for i in range(w2n):
             tt=W2[0].pop(0)
             W2[0].append(tt)
-        print("Enter Wheel 3 config :")''' number between 1 and 25'''
+        print("Enter Wheel 3 config :")
+        ''' number between 1 and 25'''
         w3n = int(input())
         for i in range(w1n):
             tt = W3[0].pop(0)
