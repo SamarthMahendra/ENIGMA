@@ -32,7 +32,7 @@ class enigma:
             23: 'X',
             24: 'Y',
             25: 'Z'
-        }
+        }#coverts numbers to alpabets
         self.ATON = {
             'A': 0,
             'B': 1,
@@ -60,7 +60,7 @@ class enigma:
             'X': 23,
             'Y': 24,
             'Z': 25
-        }
+        }#converts alphabets to numbers
         self.L1 = [
             'J',
             'G',
@@ -88,7 +88,7 @@ class enigma:
             'Z',
             'Y',
             'H'
-        ]
+        ] #rotor1 mapping
         self.L2 = [
             'N',
             'T',
@@ -116,7 +116,7 @@ class enigma:
             'H',
             'G',
             'Q'
-        ]
+        ]#rotor2 mapping
         self.L3 = [
             'J',
             'V',
@@ -144,7 +144,7 @@ class enigma:
             'W',
             'F',
             'L'
-        ]
+        ]#rotor3 mapping
         self.ETW = {
             'A': 'Q',
             'B': 'W',
@@ -172,7 +172,7 @@ class enigma:
             'X': 'N',
             'Y': 'M',
             'Z': 'L'
-        }
+        }# entery mapping
         self.R={
     'A':'Q',
     'B':'Y',
@@ -200,7 +200,9 @@ class enigma:
     'X':'R',
     'Y':'B',
     'Z':'L'
-}
+} #replector mapping
+        '''Rotor mapping and functions are put into one entity so that we can
+        suffle around the rotor and use respective functions on that'''
         self.Rotors = [[self.L1, self.fnL1], [self.L2, self.fnL2], [self.L3, self.fnL3]]
     def fnETW(self,v,d):
         ''' d==1 means its going in positive direction else its coming back'''
@@ -212,23 +214,41 @@ class enigma:
                     return key
     def fnL1(self,v,d):
         if d==1:
+            '''First the letter is converted to number
+            and then it returns the ith position character in L1 mapping
+            '''
             vnumber=self.ATON[v]
             return self.L1[vnumber]
         else:
+            '''First finds the index of the letter in L1 mapping
+            then converts the number to alpha and returns
+            '''
             vnumber=self.L1.index(v)
             return self.NTOA[vnumber]
     def fnL2(self,v,d):
         if d==1:
+            '''First the letter is converted to number
+            and then it returns the ith position character in L2 mapping
+            '''
             vnumber=self.ATON[v]
             return self.L2[vnumber]
         else:
+            '''First finds the index of the letter in L2 mapping
+            then converts the number to alpha and returns
+            '''
             vnumber = self.L2.index(v)
             return self.NTOA[vnumber]
     def fnL3(self,v,d):
         if d==1:
+            '''First the letter is converted to number
+            and then it returns the ith position character in L3 mapping
+            '''
             vnumber=self.ATON[v]
             return self.L3[vnumber]
         else:
+            '''First finds the index of the letter in L3 mapping
+            then converts the number to alpha and returns
+            '''
             vnumber = self.L3.index(v)
             return self.NTOA[vnumber]
     def fnR(self,v):
@@ -242,17 +262,17 @@ class enigma:
         W2=self.Rotors[c2-1]
         W3=self.Rotors[c3-1]
 
-        print("Enter Wheel 1 config :")
+        print("Enter Wheel 1 config :") ''' number between 1 and 25'''
         w1n=int(input())
         for i in range(w1n):
             tt=W1[0].pop(0)
             W1[0].append(tt)
-        print("Enter Wheel 2 config :")
+        print("Enter Wheel 2 config :")''' number between 1 and 25'''
         w2n=int(input())
         for i in range(w2n):
             tt=W2[0].pop(0)
             W2[0].append(tt)
-        print("Enter Wheel 3 config :")
+        print("Enter Wheel 3 config :")''' number between 1 and 25'''
         w3n = int(input())
         for i in range(w1n):
             tt = W3[0].pop(0)
@@ -260,7 +280,7 @@ class enigma:
 
         print("--Enter a Characters You want to Encrypt/Decrypt---")
         res=""
-        x=str(input()).upper()
+        x=str(input()).upper()# coverting it to upper characters
         p1,p2,p3=0,0,0
         for i in x:
             if i==' ':
@@ -286,6 +306,7 @@ class enigma:
             t7=W2[1](t6,-1)
             t8=W1[1](t7,-1)
             res+=self.fnETW(t8,-1)
+            ''' turn rotors 1 for every one charcter and once rotor one turns 25/ completes one round next p2 '''
             t=W1[0].pop(0)
             W1[0].append(t)
         print(res)
